@@ -132,6 +132,68 @@ impl RasterTileLayerBuilder {
         }
     }
 
+    /// Initializes a builder for a layer with a dynamic URL tile loader.
+    ///
+    /// This method creates a tile loader that allows the host application to provide URLs and parameters
+    /// to force Galileo to use new map tiles. The loader can be updated with new URLs and parameters
+    /// at runtime.
+    ///
+    /// ```
+    /// use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
+    ///
+    /// let layer = RasterTileLayerBuilder::new_dynamic_url(
+    ///     "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+    /// )
+    /// .with_file_cache("target")
+    /// .build()?;
+    /// # Ok::<(), galileo::error::GalileoError>(())
+    /// ```
+    pub fn new_dynamic_url(url_template: impl Into<String>) -> Self {
+        use super::DynamicUrlTileLoader;
+
+        let loader = DynamicUrlTileLoader::new(url_template, None, false);
+        Self {
+            loader_type: LoaderType::Custom(Box::new(loader)),
+            tile_schema: None,
+            messenger: None,
+            cache: CacheType::None,
+            offline_mode: false,
+            attribution: None,
+        }
+    }
+
+    /// Initializes a builder for a layer with a dynamic URL tile loader and cache.
+    ///
+    /// This method creates a tile loader that allows the host application to provide URLs and parameters
+    /// to force Galileo to use new map tiles, with optional caching support.
+    ///
+    /// ```
+    /// use galileo::layer::raster_tile_layer::RasterTileLayerBuilder;
+    ///
+    /// let layer = RasterTileLayerBuilder::new_dynamic_url_with_cache(
+    ///     "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    ///     Some(Box::new(FileCacheController::new("./cache").unwrap()))
+    /// )
+    /// .build()?;
+    /// # Ok::<(), galileo::error::GalileoError>(())
+    /// ```
+    pub fn new_dynamic_url_with_cache(
+        url_template: impl Into<String>,
+        cache: Option<Box<dyn PersistentCacheController<str, Bytes>>>,
+    ) -> Self {
+        use super::DynamicUrlTileLoader;
+
+        let loader = DynamicUrlTileLoader::new(url_template, cache, false);
+        Self {
+            loader_type: LoaderType::Custom(Box::new(loader)),
+            tile_schema: None,
+            messenger: None,
+            cache: CacheType::None,
+            offline_mode: false,
+            attribution: None,
+        }
+    }
+
     /// Adds a file cache for the tiles in the given folder.
     ///
     /// The file cache controller will create folders under the given path based on the url of the

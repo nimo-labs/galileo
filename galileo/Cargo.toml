@@ -34,7 +34,10 @@ galileo-mvt = { workspace = true }
 galileo-types = { workspace = true }
 geojson = { workspace = true, optional = true }
 geozero = { workspace = true, features = ["with-geojson", "with-geo"] }
-image = { workspace = true, default-features = false, features = ["png", "jpeg"], optional = true }
+image = { workspace = true, default-features = false, features = [
+    "png",
+    "jpeg",
+], optional = true }
 log = { workspace = true }
 lyon = { workspace = true, features = ["serialization"] }
 nalgebra = { workspace = true }
@@ -44,11 +47,18 @@ quick_cache = { workspace = true }
 raw-window-handle = { workspace = true, optional = true }
 regex = { workspace = true }
 rustybuzz = { workspace = true, optional = true }
-serde = { workspace = true, optional = true, features = ["std", "derive", "rc"] }
+serde = { workspace = true, optional = true, features = [
+    "std",
+    "derive",
+    "rc",
+] }
 strfmt = { workspace = true }
 thiserror = { workspace = true }
 web-time = { workspace = true, features = ["serde"] }
-winit = { workspace = true, default-features = true, features = ["rwh_06"], optional = true }
+winit = { workspace = true, default-features = true, features = [
+    "rwh_06",
+], optional = true }
+urlencoding = { workspace = true }
 
 [dev-dependencies]
 anyhow = { workspace = true }
@@ -74,7 +84,11 @@ doctest = false
 font-kit = { workspace = true }
 maybe-sync = { workspace = true, features = ["sync"] }
 reqwest = { workspace = true }
-tokio = { workspace = true, default-features = true, features = ["macros", "rt", "rt-multi-thread"] }
+tokio = { workspace = true, default-features = true, features = [
+    "macros",
+    "rt",
+    "rt-multi-thread",
+] }
 wgpu = { workspace = true, default-features = true, optional = true }
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
@@ -84,7 +98,10 @@ console_error_panic_hook = { workspace = true }
 console_log = { workspace = true }
 fontdb = { workspace = true }
 futures = { workspace = true }
-wgpu = { workspace = true, default-features = false, features = ["webgl", "wgsl"] }
+wgpu = { workspace = true, default-features = false, features = [
+    "webgl",
+    "wgsl",
+] }
 wasm-bindgen-futures = { workspace = true }
 wasm-bindgen = { workspace = true }
 wasm-bindgen-derive = { workspace = true }
@@ -125,4 +142,3 @@ required-features = ["geojson"]
 
 [lints]
 workspace = true
-

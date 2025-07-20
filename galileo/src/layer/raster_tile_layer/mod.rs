@@ -15,7 +15,7 @@ use crate::tile_schema::{TileIndex, TileSchema};
 use crate::view::MapView;
 
 mod provider;
-pub use provider::{RasterTileLoader, RestTileLoader};
+pub use provider::{DynamicUrlTileLoader, RasterTileLoader, RestTileLoader};
 
 mod builder;
 pub use builder::RasterTileLayerBuilder;
