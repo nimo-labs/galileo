@@ -31,7 +31,7 @@ use bundle_store::{BundleStore, UpdateType};
 pub use feature::Feature;
 use feature_store::VecFeatureStore;
 pub use feature_store::{FeatureId, FeatureStore};
-pub use symbol::Symbol;
+pub use symbol::{Symbol, CirclePointSymbol, ImagePointSymbol, TextMarkerSymbol, TextProvider};
 
 /// Feature layers render a set of [features](Feature) using [symbols](Symbol).
 ///
